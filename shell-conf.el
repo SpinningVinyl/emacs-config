@@ -24,6 +24,10 @@ Like normal Emacs `C-k'.  Kill to end of line and put content in kill-ring."
     (ghostel-send-key "k" "ctrl"))
 )
 
+;; use ripgrep as grep
+(setq grep-command "rg -nS --no-heading "
+      grep-use-null-device nil)
+
 ;;;;;;;;;;;;;;;; eshell coniguration
 
 ;; eshell aliases

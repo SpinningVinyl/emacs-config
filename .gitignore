@@ -1,0 +1,20 @@
+# ignore everything
+/*
+
+# keep repo metadata
+!/.gitignore
+
+# keep configuration
+!/company-conf.el
+!/completions-conf.el
+!/dired-conf.el
+!/early-init.el
+!/editor-conf.el
+!/emacs-custom.el
+!/init.el
+!/lang-conf.el
+!/modes.el
+!/org-conf.el
+!/scheme-conf.el
+!/shell-conf.el
+!/ui-conf.el

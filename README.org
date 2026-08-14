@@ -1,0 +1,12 @@
+** My Emacs configuration
+
+Nothing special, just some popular packages + a couple of custom Lisp functions.
+
+If you want to try it out:
+
+#+BEGIN_SRC shell
+cd ~
+git clone https://github.com/SpinningVinyl/emacs-config.git .emacs.d
+#+END_SRC
+
+Don't forget to back up your previous configuration (=~/.emacs= or =~/.emacs.d=) in advance!

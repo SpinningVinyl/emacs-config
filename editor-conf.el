@@ -19,6 +19,7 @@
 (turn-on-font-lock) ; enable syntax highlighting
 (setq sentence-end-double-space nil) ; double spaces after sentences are a crime against humanity
 (column-number-mode t) ; enable column numbers in the modeline
+(global-auto-revert-mode t) ; autoreload buffers when changed on disk
 
 (use-package sudo-edit) ; enable editing of files that require sudo permissions
 

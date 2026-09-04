@@ -281,4 +281,13 @@ or nil when nothing is found."
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   (undo-tree-visualizer-timestamps t))
 
+;; multiple cursors
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c C-n" . mc/mark-next-like-this)
+         ("C-c C-p" . mc/mark-previous-like-this)
+         ("C-c C-a" . mc/mark-all-like-this)
+         ("C-S-c C-S-c". mc/edit-lines)))
+
 ;;; editor-conf.el ends here

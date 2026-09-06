@@ -95,7 +95,16 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
-(use-package modus-themes)
-(load-theme 'modus-vivendi-tinted :no-confirm)
+;; (use-package modus-themes)
+;; (load-theme 'modus-vivendi-tinted :no-confirm)
+
+;; (load-theme 'wombat :no-confirm)
+;; (custom-set-faces
+;;  '(highlight ((t (:underline nil)))))
+
+(use-package modus-nordic-night-theme
+  :straight (modus-nordic-night-theme :type git :host codeberg :repo "ashton314/modus-nordic-night")
+  :config
+  (load-theme 'modus-nordic-midnight t))
 
 ;;; ui-conf.el ends here

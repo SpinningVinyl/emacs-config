@@ -48,6 +48,7 @@
 ;; start the server to make sure that emacsclient opens files in the same frame
 (load "server")
 (unless (server-running-p) (server-start))
+(setopt multiple-terminals-merge-keyboards nil)
 
 (load "~/.emacs.d/ui-conf.el") ;; general UI configuration
 (load "~/.emacs.d/editor-conf.el") ;; settings for actually editing text files

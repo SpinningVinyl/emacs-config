@@ -23,7 +23,7 @@
 
 ;; enable helm
 (helm-mode 1)
-;; make sure that helm does not take all available space in the frame
+;; make sure that helm does not take all the available space in the frame
 (helm-autoresize-mode 1)
 (setq
       ;; open helm buffer inside the current window, do not occupy the whole frame
@@ -37,6 +37,11 @@
       ;; use recentf to provide file history
       helm-ff-file-name-history-use-recentf t
       helm-echo-input-in-header-line t)
+
+;; disable company pop-ups in helm minibuffers
+(add-hook 'helm-minibuffer-set-up-hook
+          (lambda ()
+            (company-mode -1)))
 
 ; rebind TAB to persistent action
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)

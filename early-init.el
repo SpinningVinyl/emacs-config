@@ -2,7 +2,14 @@
 
 (setq lexical-binding t)
 
-(setq gc-cons-threshold (* 100 1024 1024)) 
+;; speed up initialization
+(setq gc-cons-threshold (* 100 1024 1024))
+
+;; reduce GC threshold after startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold
+                  (* 16 1024 1024))))
 
 ;; display startup time
 (defun prsv/display-startup-time ()
@@ -17,7 +24,8 @@
 
 ;; suppress lexical binding warnings globally
 ;; until openSUSE fixes their site-lisp packages
-(add-to-list 'warning-suppress-types '(files missing-lexbind-cookie))
+(add-to-list 'warning-inhibit-types '(files missing-lexbind-cookie))
+(load "site-start" t)
 
 (provide 'early-init)
 ;;; early-init.el ends here

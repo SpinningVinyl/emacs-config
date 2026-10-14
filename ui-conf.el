@@ -24,7 +24,7 @@
 
 ;; define font size
 (defvar prsv/default-font-size 110)
-(defvar prsv/variable-pitch-font-size 120)
+(defvar prsv/variable-pitch-font-size 110)
 
 ;; set default font
 (set-face-attribute 'default nil :font "IBM Plex Mono" :height prsv/default-font-size)
@@ -95,12 +95,15 @@
 (use-package all-the-icons
   :if (display-graphic-p))
 
+
+(load-theme 'leuven)
+
 (use-package modus-themes
-  :ensure t
-  :init
-  (setq modus-themes-common-palette-overrides
-        '((fringe bg-main)))
-  (load-theme 'modus-vivendi-tinted :no-confirm))
+   :ensure t
+   :init
+;;   (setq modus-themes-common-palette-overrides
+;;         '((fringe bg-main)))
+   (load-theme 'modus-operandi-tinted :no-confirm))
 
 ;; (load-theme 'wombat :no-confirm)
 ;; (custom-set-faces
@@ -112,11 +115,17 @@
 ;;              :repo "magus/modus-catppuccin"
 ;;              :branch "main")
 ;;   :config
+;;   (setq modus-themes-common-palette-overrides
+;;      '((fringe bg-main)))
 ;;   (load-theme 'catppuccin-mocha :no-confirm))
 
 ;; (use-package modus-nordic-night-theme
-;;   :straight (modus-nordic-night-theme :type git :host codeberg :repo "ashton314/modus-nordic-night")
+;;   :straight (:type git
+;;              :host codeberg
+;;              :repo "ashton314/modus-nordic-night")
 ;;   :config
+;;   (setq modus-themes-common-palette-overrides
+;;      '((fringe bg-main)))
 ;;   (load-theme 'modus-nordic-midnight t))
 
 

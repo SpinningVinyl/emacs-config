@@ -12,8 +12,9 @@
   (setq wdired-allow-to-change-permissions t)
   (setq wdired-create-parent-directories t)
   (setq dired-dwim-target t)
-  (when (string= system-type "darwin")
-    (setq insert-directory-program "/usr/local/bin/gls"))
+  ;; legacy macOS settings
+  (when (eq system-type 'darwin)
+    (setq insert-directory-program "/opt/homebrew/bin/gls"))
   :custom ((dired-listing-switches "-agho --group-directories-first")))
 
 ;; use file icons in dired

@@ -26,7 +26,10 @@
      (plantuml . t)
      (latex . t)
      (python . t)))
-  (setq org-confirm-babel-evaluate nil)
+  ;; don't evaluate untrusted code blocks
+  (setq org-confirm-babel-evaluate
+      (lambda (lang _body)
+        (not (member lang '("ditaa" "dot" "gnuplot")))))
   (setq org-ditaa-jar-path (expand-file-name "~/bin/java/ditaa-0.11.0-standalone.jar"))
   (setq org-plantuml-jar-path (expand-file-name "~/bin/java/plantuml.jar"))
   )
@@ -56,8 +59,8 @@
     '(org-level-2 ((t (:inherit outline-2 :height 1.5))))
     '(org-level-3 ((t (:inherit outline-3 :height 1.25))))
     '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-    '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-    (set-face-attribute 'org-document-title nil :height 1.5))
+    '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+  (set-face-attribute 'org-document-title nil :height 1.5)
   )
 
 (use-package org
@@ -72,11 +75,13 @@
   ;; directory for storing attachments
   (setq org-attach-id-dir "~/Documents/Org/attachments")
   (setq org-attach-use-inheritance t) ; !!!IMPORTANT: inherit attachments from parent nodes 
-  (setq org-agenda-files '("~/Documents/Org/Current.org"
-                           "~/Documents/Org/Archive.org"))
+  (setq org-agenda-files '("~/Documents/Org/agenda/work.org"
+                           "~/Documents/Org/agenda/personal.org"
+                           "~/Documents/Org/agenda/archive.org"))
   (setq org-refile-targets
-    '(("Archive.org" :maxlevel . 1)
-      ("Current.org" :maxlevel . 1)))
+    '(("archive.org" :maxlevel . 1)
+      ("personal.org" :maxlevel . 1)
+      ("work.org" :maxlevel . 1)))
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   ;; set keywords for todo entries
@@ -84,9 +89,11 @@
         '((sequence "TODO(t)" "NEXT(n)" "SOMEDAY(s)" "|" "DONE(d@)" "CANCELED(k@)")))
 
   (setq org-capture-templates
-    `(("t" "Task" entry (file+headline "~/Documents/Org/Current.org" "Inbox")
+    `(("w" "Task (work)" entry (file+headline "~/Documents/Org/agenda/work.org" "Inbox")
+       "** TODO %?\nCreated on: %U\n%a\n%i" :empty-lines 1)
+      ("p" "Task (personal)" entry (file+headline "~/Documents/Org/agenda/personal.org" "Inbox")
          "** TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-      ("j" "Journal" entry (file+olp+datetree "~/Documents/Org/Journal.org")
+      ("j" "Journal" entry (file+olp+datetree "~/Documents/Org/journal.org")
        "* %?\nEntered on %U\n %i\n" :empty-lines 1)))
   
   (require 'org-id)

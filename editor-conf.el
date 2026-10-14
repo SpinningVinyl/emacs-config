@@ -77,7 +77,7 @@
 (defun prsv/fix-indentation-hook ()
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
-  )
+)
 
 (add-hook 'prog-mode-hook 'prsv/display-line-numbers-hook)
 (add-hook 'prog-mode-hook 'prsv/electric-pairs-hook)
@@ -188,15 +188,16 @@
   :ensure t
   :bind (("C-=" . er/expand-region)))
 
-;; Create parent directory when visiting a file
-(defadvice find-file (before make-directory-maybe (filename &optional wildcards) activate)
-  "Create parent directory if not exists while visiting file."
-  (unless (file-exists-p filename)
-    (let ((dir (file-name-directory filename)))
-      (unless (file-exists-p dir)
-        (make-directory dir t)))))
+(defun prsv/create-parent-directory ()
+  "Create the parent directory of the current file if necessary."
+  (when-let* ((filename buffer-file-name)
+              (directory (file-name-directory filename)))
+    (unless (file-directory-p directory)
+      (make-directory directory t))))
 
-
+;; Create parent directory when saving a file
+(add-hook 'before-save-hook
+          #'prsv/create-parent-directory)
 
 ;; functions to find and delete surrounding pairs (brackets, braces, quotes, etc.)
 (defun prsv/delete-surround-at-point--find-brackets (pos)

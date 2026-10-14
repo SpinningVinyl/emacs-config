@@ -43,7 +43,10 @@
 						    ))))
     (setenv "PATH" path-from-shell)
     (setq exec-path (split-string path-from-shell path-separator))))
-(prsv/set-exec-path-from-shell-PATH)
+
+;; on macOS, GUI apps (stupidly) don't inherit the shell's PATH
+(when (eq system-type 'darwin)
+  (prsv/set-exec-path-from-shell-PATH))
 
 ;; start the server to make sure that emacsclient opens files in the same frame
 (load "server")
@@ -60,6 +63,7 @@
 (load "~/.emacs.d/company-conf.el") ;; completion with company-mode
 (load "~/.emacs.d/modes.el") ;; various modes that are not Org ;)
 (load "~/.emacs.d/org-conf.el") ;; the meat and potatoes
+(load "~/.emacs.d/hyperbole.el")
 
 ;; don't allow Custom to put its junk into init.el
 (setq custom-file "~/.emacs.d/emacs-custom.el")
